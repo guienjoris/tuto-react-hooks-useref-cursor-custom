@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useRef} from 'react';
 import './App.css';
 
 function App() {
+  let curseurRef = useRef();
+  const mousePos = e =>{
+    curseurRef.current.setAttribute('style',`top:${e.pageY -20 }px; left:${e.pageX -20 }px;`) // e.pageY et e.pageX pour que la div ref {curseurRef} suivent la souris, -20 pour que ce soit centré  
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div onMouseMove={mousePos}className="App"> 
+      <div ref={curseurRef}
+      className="curseur-perso">
+
+      </div>
+      <h1>
+        lorem ipsum
+      </h1>
     </div>
   );
 }
 
 export default App;
+
+/* 
+ OnMouseMove attribut qui sert a détecter quand la souris bouge et déclencher la fonction mousePos qui détecte l'event et renvoi un objet utilisable avec useRef();
+*/
